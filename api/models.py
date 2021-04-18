@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 
 
 class Tasks(models.Model):
-
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="created by :")
     title = models.CharField(max_length=100)
     models.DateTimeField(auto_now_add=True, verbose_name="created date")
     status = models.BooleanField(default=False, blank=True, null=True)
