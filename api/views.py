@@ -78,3 +78,21 @@ def TaskUpdate(request, pk):
 def TaskDelete(request, pk):
     tasks = Tasks.objects.get(pk=pk).delete()
     return Response("Delete SuccessFull")
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def MoveToDone(request, pk):
+    tasks = Tasks.objects.get(pk=pk)
+    tasks.status = True
+    tasks.save()
+    return Response("Moved To Done List Successful")
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def MoveToTask(request, pk):
+    tasks = Tasks.objects.get(pk=pk)
+    tasks.status = False
+    tasks.save()
+    return Response("Moved To Task List Successful")
