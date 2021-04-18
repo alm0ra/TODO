@@ -1,13 +1,18 @@
-from django.shortcuts import render
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
+from django.shortcuts import render
+from rest_framework.authentication import (BasicAuthentication,
+                                           SessionAuthentication)
+from rest_framework.decorators import (api_view, authentication_classes,
+                                       permission_classes)
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-
+from .models import Tasks
+from .serializers import TaskSerializer
 
 
 @api_view(['GET'])
-def apiOverview(request):
+def ApiOverview(request):
 
     api_urls = {
         'Task List':'/task-list/',
@@ -21,3 +26,20 @@ def apiOverview(request):
 
     }
     return Response(api_urls)
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def TaskList(request):
+
+    tasks = Task.objects.filter(status=False)
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def DoneList(request):
+    tasks = Task.objects.filter(status=True)
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
