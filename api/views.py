@@ -32,7 +32,7 @@ def ApiOverview(request):
 @permission_classes([IsAuthenticated])
 def TaskList(request):
 
-    tasks = Task.objects.filter(status=False)
+    tasks = Tasks.objects.filter(status=False)
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
 
@@ -40,6 +40,41 @@ def TaskList(request):
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated])
 def DoneList(request):
-    tasks = Task.objects.filter(status=True)
+    tasks = Tasks.objects.filter(status=True)
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def TaskDetail(request, pk):
+    tasks = Tasks.objects.get(pk=pk)
+    serializer = TaskSerializer(tasks, many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def CreateTask(request):
+    serializer = TaskSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def TaskUpdate(request, pk):
+    tasks = Tasks.objects.get(pk=pk)
+    serializer = TaskSerializer(instance=tasks,data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def TaskDelete(request, pk):
+    tasks = Tasks.objects.get(pk=pk).delete()
+    return Response("Delete SuccessFull")
