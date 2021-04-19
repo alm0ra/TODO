@@ -23,6 +23,65 @@ $ python manage.py runserver <port>
 
 ```
 
+### Installation with Docker
+
+
+* Run Project on Docker
+
+#### 1. install Docker And Docker-compose on your system 
+
+* For `Ubunto`
+```bash
+$ sudo apt install docker.io
+$ sudo apt install docker-compose
+```
+#### 2. Create Volumes And Networks on your System
+
+* Create `volumes`
+```bash
+$ sudo docker volume create todo_static_volume
+$ sudo docker volume create todo_media_volume
+$ sudo docker volume create todo_postgresql
+
+```
+* Create `Networks`
+```bash
+$ sudo docker network create todo_network
+$ sudo docker network create nginx_network
+```
+* Run `docker-composers`
+
+```bash
+$ git clone https://github.com/Ali-moradi-dev/TODO.git
+$ cd TODO/ 
+$ sudo docker-compose up -d
+$ cd config/nginx
+$ sudo docker-compose up -d
+
+```
+
+
+* Make `Migrations`
+
+```bash
+$ cd TODO/  ## if you are in /todo/config/nginx ==> $ cd ../../
+$ sudo docker exec -it config_todo_1 sh
+# python manage.py makemigrations
+# python manage.py makemigrations blog
+# python manage.py makemigrations land
+# python manage.py makemigrations projects
+# python manage.py makemigrations dashboard
+# python manage.py makemigrations authentication
+# python manage.py migrate
+
+#### Creating Superuser
+
+# python manage.py createsuperuser
+
+# exit
+
+```
+
 
 
 ### make .env File
