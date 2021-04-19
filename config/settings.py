@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,12 +78,30 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME':config('POSTFRES_DB'),
+            'USER':config('POSTGRES_USER'),
+            'PASSWORD':config('POSTGRES_PASSWORD'),
+            'HOST':'localhost',
+            'PORT':'5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME':config('POSTFRES_DB'),
+            'USER':config('POSTGRES_USER'),
+            'PASSWORD':config('POSTGRES_PASSWORD'),
+            'HOST':'todo_postgresql',
+            'PORT':'5432',
+        }
+    }
 
 
 # Password validation
@@ -108,9 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
