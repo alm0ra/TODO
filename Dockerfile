@@ -3,9 +3,9 @@ LABEL MAINTAINER="Ali Moradi | ali.mrd318@gmail.com"
 
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /todo
-WORKDIR /todo
-COPY . /todo
+RUN mkdir /config
+WORKDIR /config
+COPY . /config
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt

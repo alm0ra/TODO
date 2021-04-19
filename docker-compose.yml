@@ -6,9 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/todo
-      - todo_static_volume:/todo/static
-      - todo_media_volume:/todo/media
+      - .:/config
+      - todo_static_volume:/config/static
+      - todo_media_volume:/config/media
     restart: always
     ports:
       - "8000:8000"

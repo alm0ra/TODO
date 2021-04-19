@@ -9,8 +9,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - Todo_static_volume:/todo/static
-      - Todo_media_volume:/todo/media
+      - todo_static_volume:/config/static
+      - todo_media_volume:/config/media
     networks:
       - nginx_network
 
