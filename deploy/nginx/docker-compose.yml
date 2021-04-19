@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - Todo_static_volume:/todo/static
+      - Todo_media_volume:/todo/media
+    networks:
+      - nginx_network
+
+volumes:
+  todo_static_volume:
+    external: true
+  todo_media_volume:
+    external: true
+networks: 
+  nginx_network:
+    external: true
