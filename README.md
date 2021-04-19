@@ -43,13 +43,13 @@ PGADMIN_DEFAULT_PASSWORD=
 
 * **URLS**
 
-    * **Get Token to Auth**             `POST`                 /api-token-auth/
-    * **Return Task's List**            `GET`                  /task-list/
-    * **Return Done Task's List**       `GET`                  /done-list/
-    * **get Details, Update, Delete**   `GET` `PUT` `DELETE`   /task-detail/<str:pk>
-    * **Create a Task**                 `POST`                 /task-create/
-    * **Make a Task Done**              `GET`                  /move-done/<str:pk>
-    * **Make a Task UnDone**            `GET`                  /move-task/<str:pk>
+    * **Get Token to Auth**             `POST`                 /api/api-token-auth/
+    * **Return Task's List**            `GET`                  /api/task-list/
+    * **Return Done Task's List**       `GET`                  /api/done-list/
+    * **get Details, Update, Delete**   `GET` `PUT` `DELETE`   /api/task-detail/<str:pk>
+    * **Create a Task**                 `POST`                 /api/task-create/
+    * **Make a Task Done**              `GET`                  /api/move-done/<str:pk>
+    * **Make a Task UnDone**            `GET`                  /api/move-task/<str:pk>
 
 
 * **Method:**
