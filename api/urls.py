@@ -9,5 +9,7 @@ urlpatterns = [
     path('/done-list/', views.DoneList.as_view(), name = "done-list"),
     path('/task-detail/<str:pk>', views.TaskDetail.as_view(), name = "task-detail"),
     path('/task-create/', views.CreateTask.as_view(), name="task-create"),
+    path('/move-done/<str:pk>', views.MoveToDone, name = "move-done"),
+    path('/move-task/<str:pk>', views.MoveToTask, name = "move-task"),
 
 ]
