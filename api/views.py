@@ -1,10 +1,10 @@
 from django.http import JsonResponse
-from rest_framework.authentication import (BasicAuthentication,
-                                           SessionAuthentication)
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import (api_view, authentication_classes,
                                        permission_classes)
 from rest_framework.generics import (CreateAPIView, ListAPIView,
-                                     RetrieveUpdateDestroyAPIView, UpdateAPIView)
+                                     RetrieveUpdateDestroyAPIView,
+                                     UpdateAPIView)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -27,31 +27,31 @@ def ApiOverview(request):
     return Response(api_urls)
 
 class TaskList(ListAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Tasks.objects.filter(status=False)
     serializer_class = TaskSerializer
 
 class DoneList(ListAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Tasks.objects.filter(status=True)
     serializer_class = TaskSerializer
 
 class CreateTask(CreateAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Tasks.objects.all()
     serializer_class = TaskSerializer
 
 class TaskDetail(RetrieveUpdateDestroyAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Tasks.objects.all()
     serializer_class = TaskSerializer
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, BasicAuthentication])
+@authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def MoveToDone(request, pk):
     tasks = Task.objects.get(pk=pk)
@@ -60,7 +60,7 @@ def MoveToDone(request, pk):
     return Response("Moved To Done List Success")
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, BasicAuthentication])
+@authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def MoveToTask(request, pk):
     tasks = Task.objects.get(pk=pk)
