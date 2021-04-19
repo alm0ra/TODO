@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  todo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/todo
+      - todo_static_volume:/todo/static
+      - todo_media_volume:/todo/media
+    restart: always
+    ports:
+      - "8000:8000"
+    networks: 
+      - todo_network
+      - nginx_network
+    depends_on:
+      - todo_postgresql
+
+  todo_postgresql:
+    image: postgres:12
+    container_name: todo_postgresql
+    volumes:
+      -  todo_postgresql:/var/lib/postgresql/data
+    restart: always
+    env_file: .env
+    ports:
+      - "5432:5432"
+    networks:
+      - todo_network
+  postgre_gui:
+    image: dpage/pgadmin4
+    container_name: db_gui
+    restart: always
+    env_file: .env
+    ports:
+      - "8081:80"
+    networks: 
+      - todo_network
+
+volumes:
+  todo_postgresql:
+    external: true
+  todo_static_volume:
+    external: true
+  todo_media_volume:
+    external: true
+networks:
+  todo_network:
+    external: true
+  nginx_network:
+    external: true
+
+
