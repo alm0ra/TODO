@@ -1,5 +1,42 @@
 ## TODO
 
+### Get start
+
+Setup project environment with [virtualenv](https://virtualenv.pypa.io) and [pip](https://pip.pypa.io).
+
+```bash
+$ git clone https://github.com/Ali-moradi-dev/TODO.git
+$ cd TODO
+$ python -m venv env
+$ source env/bin/activate
+$ pip install -r requirements.txt
+
+# Create Super user And Migrations.
+
+$ python manage.py createsuperuser 
+$ python manage.py makemigrations
+$ python manage.py migrate
+
+# Finally Run Project.
+
+$ python manage.py runserver <port>
+
+```
+
+
+
+### make .env File
+```bash
+DEBUG=
+SECRET_KEY=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTFRES_DB=
+PGADMIN_DEFAULT_EMAIL=
+PGADMIN_DEFAULT_PASSWORD=
+```
+
+
 **TODO API Guide**
 ----
   Returns json data about a single user.
