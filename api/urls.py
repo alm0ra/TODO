@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
 
@@ -11,5 +11,6 @@ urlpatterns = [
     path('/task-create/', views.CreateTask.as_view(), name="task-create"),
     path('/move-done/<str:pk>', views.MoveToDone, name = "move-done"),
     path('/move-task/<str:pk>', views.MoveToTask, name = "move-task"),
+    path('/api-token-auth/', obtain_auth_token, name="token-generator")
 
 ]
