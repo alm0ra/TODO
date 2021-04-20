@@ -13,9 +13,15 @@ $ pip install -r requirements.txt
 
 # Create Super user And Migrations.
 
-$ python manage.py createsuperuser 
 $ python manage.py makemigrations
 $ python manage.py migrate
+$ python manage.py makemigrations api
+$ python manage.py migrate api
+
+$ python manage.py createsuperuser
+
+# Make Enviorment file
+$ touch .env 
 
 # Finally Run Project.
 
